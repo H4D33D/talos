@@ -31,7 +31,7 @@ Having completed Phantom Liberty recently, I was inspired to make talos.
 ![Main Dashboard](images/talos-dashboard.png)
 
 One of my favorite designs I made was the Sensor Indicators and my lux bar. 
-This feature was implemented so that I could work with headphones, knowing if someone need my attention from my office. 
+This feature was implemented so that I could work with headphones, knowing if someone needs my attention from my office. 
 I believe solid colored indictors are a very underrated and underutilized way to communicate information.
 
 Indicator 1 (Left) - Displays the sensor's state of motion. 
