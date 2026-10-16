@@ -42,6 +42,7 @@ Indicator 2 (Right) - Displays the sensor's radar field.
 
 Illumence Bar - Displays sensor's lux readings. 
 |Illumance Bar | Color | Purpose |
+|---|---|---|
 | lux < 10 | Black | Hallway light is OFF. |
 | lux > 10 | White | Hallway light is ON. |
 
