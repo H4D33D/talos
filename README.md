@@ -3,13 +3,16 @@
 Talos is a personal home hub I'm developing for my Raspberry Pi 4. It features a custom, cyberpunk-inspired interface designed to monitor my home network, manage devices, and bring different functions together in one place.
 
 The project is still in development, with more features and integrations planned, plans are being changed constantly.
-
-## Dashboard
-
 ![Talos Dashboard](images/dashboard.png)
 
 I designed and programmed the interface using Python, HTML, CSS, and JavaScript. My goal was to create something functional while giving it a distinct visual style inspired by Cyberpunk 2077.
 Having completed Phantom Liberty recently, I was inspired to make talos.
+
+## What I used so far...
+- Pi 4
+- 7" Touch Screen Pi4 Case
+- Sonoff Gateway Adapter
+- Aqara Precense Sensor
 
 ## What I've Built
 
