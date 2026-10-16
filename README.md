@@ -3,7 +3,7 @@
 Talos is a personal home hub I'm developing for my Raspberry Pi 4. It features a custom, cyberpunk-inspired interface designed to monitor my home network, manage devices, and bring different functions together in one place.
 
 The project is still in development, with more features and integrations planned, plans are being changed constantly.
-![Talos Dashboard](images/dashboard.png)
+![Talos Dashboard](images/dashboard.jpg)
 
 I designed and programmed the interface using Python, HTML, CSS, and JavaScript. My goal was to create something functional while giving it a distinct visual style inspired by Cyberpunk 2077.
 Having completed Phantom Liberty recently, I was inspired to make talos.
@@ -26,7 +26,8 @@ Having completed Phantom Liberty recently, I was inspired to make talos.
 ## Pictures
 
 ### Main Dashboard
-![Main Dashboard](images/dashboard.png)
+![Main Dashboard](images/dashboard.jpg)
+
 One of my favorite designs I made was the Sensor Indicators and my lux bar. 
 This feature was implemented so that I could work with headphones, knowing if someone need my attention from my office. 
 I believe solid colored indictors are a very underrated and underutilized way to communicate information.
@@ -57,7 +58,8 @@ That's why it reads like a network traffic issue, rather than sensors.
 ![System Controls](images/system.png)
 
 ### Google Home
-![System Controls](images/system.png)
+![System Controls](images/home.jpg)
+
 The way I implemented Google Home wasn't thought to be embedded within my Python app; I can't do that. I simply have a Chromium window open without Chromium borders, set to a specific resolution and point. When I tap Google Home on the navigation bar, the Chromium window is brought to the front. 
 
 ### Other Features
