@@ -11,6 +11,7 @@ Having completed Phantom Liberty recently, I was inspired to make talos.
 ## What I used so far...
 - Pi 4
 - 7" Touch Screen Pi4 Case
+- Network Switch
 - Sonoff Gateway Adapter
 - Aqara Precense Sensor
 
