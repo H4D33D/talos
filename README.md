@@ -8,7 +8,7 @@ The project is still in development, with more features and integrations planned
 
 
 I designed and programmed the interface using Python, HTML, CSS, and JavaScript. My goal was to create something functional while giving it a distinct visual style inspired by Cyberpunk 2077.
-Having completed Phantom Liberty recently, I was inspired to make talos.
+Having completed Phantom Liberty recently, I was inspired to make talos. Talos reads data from port mirroring on a network switch. 
 
 ## What I used so far...
 - Pi 4
