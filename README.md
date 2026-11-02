@@ -47,8 +47,8 @@ Indicator 2 (Right) - Displays the sensor's radar field.
 | Green | No updates in the last minute. | CLEAR |
 | Red | Sensor is actively triggered. | BOTTLENECK |
 
-Illumence Bar - Displays sensor's lux readings. 
-|Illumance Bar | Color | Purpose |
+Illuminance Bar - Displays sensor's lux readings. 
+|Illuminance Bar | Color | Purpose |
 |---|---|---|
 | lux < 10 | Black | Hallway light is OFF. |
 | lux > 10 | White | Hallway light is ON. |
@@ -72,7 +72,7 @@ The way I implemented Google Home wasn't thought to be embedded within my Python
 ## What's Next
 
 - [ ] Homelab Integration
-- [ ] 
+- [ ] OLED Upgrade
 - [ ] 
 - [ ] 
 - [ ] 
@@ -88,3 +88,9 @@ I chose the name because I wanted the system to serve as a guardian and monitori
 ---
 
 **Status:** Ongoing personal project.
+
+Having used Talos for 2 weeks, I can say I am fairly surprised at how useful and reliable it has become.
+Although Talos started as a wall-mounted hub, it has now become a dedicated display on my desk. 
+Sensor readings are accurate and translate closely to when the events occur. 
+I have now decided to return my 8-inch LCD display, for a bigger OLED. 
+I want the screen to fit the background/aesthetic more than an LCD can. 
