@@ -2,7 +2,7 @@
 
 A touchscreen home hub for a Raspberry Pi: live sensor status, system health, and a passcode lock, with Google Home one tap away. Built with the Python standard library and plain HTML, CSS and JavaScript, with no frameworks.
 
-**[Live demo](https://h4d33d.github.io/REPO-NAME/static/)** (runs in your browser!)
+**[Live demo](https://h4d33d.github.io/talos/static/)** (runs in your browser!)
 
 ![Talos Dashboard](images/talos-demo.gif)
 
