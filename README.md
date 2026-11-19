@@ -1,96 +1,59 @@
 # Talos
 
-Talos is a personal home hub I'm developing for my Raspberry Pi 4. It features a custom, cyberpunk-inspired interface designed to monitor my home network, manage devices, and bring different functions together in one place.
+A touchscreen home hub for a Raspberry Pi: live sensor status, system health, and a passcode lock, with Google Home one tap away. Built with the Python standard library and plain HTML, CSS and JavaScript, with no frameworks.
 
-The project is still in development, with more features and integrations planned, plans are being changed constantly.
+**[Live demo](https://h4d33d.github.io/REPO-NAME/static/)** (runs in your browser!)
 
 ![Talos Dashboard](images/talos-demo.gif)
 
+## Google Home integration
 
-I designed and programmed the interface using Python, HTML, CSS, and JavaScript. My goal was to create something functional while giving it a distinct visual style inspired by Cyberpunk 2077.
-Having completed Phantom Liberty recently, I was inspired to make talos. Talos reads data from port mirroring on a network switch. 
+The Pi's screen runs a full-screen GTK/WebKit window for the dashboard. Google Home runs as a separate Chromium app window, and a thin GTK layer-shell nav bar stays on top of it, so you can always get back to the dashboard.
 
-## What I used so far...
-- Pi 4
-- 7" Touch Screen Pi4 Case
-- Network Switch
-- Sonoff Gateway Adapter
-- Aqara Precense Sensor
+- **Preloaded:** Google Home opens in the background at start-up, so switching is instant.
+- **Minimised, not closed:** it keeps its state between visits.
+- **Idle return:** after a set time without a touch, Talos returns to the dashboard and locks. Touches are tracked as timestamps only, with no input content stored.
+- **Restart:** one button in the Quick Access menu closes the window and opens a fresh one.
+- **Window control:** `wlrctl` finds, focuses and minimises the window on Wayland (`app.py`).
 
-## What I've Built
+![Google Home Mock Up with the Talos nav bar](images/talos-google-home.png)
 
-- Custom dashboard and navigation
-- System monitoring and network information
-- Notifications and system controls
-- Raspberry Pi integration
-- Google Home access (Not embedded ;) )
+## Dashboard
 
-## Pictures
-
-### Main Dashboard
 ![Main Dashboard](images/talos-dashboard.png)
 
-One of my favorite designs I made was the Sensor Indicators and my lux bar. 
-This feature was implemented so that I could work with headphones, knowing if someone needs my attention from my office. 
-I believe solid colored indictors are a very underrated and underutilized way to communicate information.
+- **Channel 01:** two status squares from an Aqara FP300 presence sensor (motion, and presence held for 10 s or more) with its battery level
+- **Light:** hallway lux, and a sun or moon with the next sunrise or sunset
+- **Pi Health:** CPU temperature and usage, RAM, disk, uptime
+- **Lock:** passcode keypad, with the dashboard still live behind it
+- **Controls:** restart Google Home, fullscreen, restart or shut down the Pi, sleep clock
 
-Indicator 1 (Left) - Displays the sensor's state of motion. 
-| Indicator Color | Purpose | Display Name |
-|---|---|---|
-| Green | No updates in the last minute. | IDLE |
-| Yellow | Motion within the past minute. | CAUTION |
-| Red | Sensor is actively triggered. | THROTTLE |
+## How it works
 
-Indicator 2 (Right) - Displays the sensor's radar field. 
-| Indicator Color | Purpose | Display Name |
-|---|---|---|
-| Green | No updates in the last minute. | CLEAR |
-| Red | Sensor is actively triggered. | BOTTLENECK |
+```
+Zigbee sensor ──► zigbee2mqtt ──► MQTT ──► server.py ──► /api/status ──► browser page
+Linux /proc, /sys ─────────────────────────┘    ▲
+Sun position (location + time) ─────────────────┘
+```
 
-Illuminance Bar - Displays sensor's lux readings. 
-|Illuminance Bar | Color | Purpose |
-|---|---|---|
-| lux < 10 | Black | Hallway light is OFF. |
-| lux > 10 | White | Hallway light is ON. |
+- `server.py` listens to the sensor over MQTT, applies the status rules, and serves one JSON endpoint that the page polls once a second.
+- Retained (stored) MQTT messages give lux and battery at start-up but never count as motion.
+- Sunrise and sunset are calculated offline with the NOAA solar equations, with no API call.
+- The passcode is stored only as a salted PBKDF2-SHA256 hash. Five wrong tries start a 10-minute break, and the server refuses settings and Pi controls while locked.
+- Pi actions (restart, shut down, screen off) go through one fixed root helper that `sudo` allows only for those three commands.
+- The browser demo works because `demo.js` answers the same `/api/...` calls in the browser with simulated data.
+- Unit tests cover the sensor rules, sun maths, Pi health parsing and the lock.
 
-The display name is supposed to evoke some mystery, since I want to be the only one who understands what the hub is communicating. 
-That's why it reads like a network traffic issue, rather than sensors. 
+Full walkthrough: [CODEBASE.md](CODEBASE.md)
 
-!(images/dashboard.jpg)
+## Run it
 
-### System Controls
-![System Controls](images/system.png)
+Needs Python 3.9 or newer.
 
-### Google Home
-![System Controls](images/home.jpg)
+```bash
+python3 server.py --demo
+```
 
-The way I implemented Google Home wasn't thought to be embedded within my Python app; I can't do that. I simply have a Chromium window open without Chromium borders, set to a specific resolution and point. When I tap Google Home on the navigation bar, the Chromium window is brought to the front. 
+Then open http://127.0.0.1:8090. On a Pi: `sudo bash install.sh`. Tests: `python3 -m unittest discover -s tests -t .`
 
-### Other Features
-![Other Features](images/features.png)
-
-## What's Next
-
-- [ ] Homelab Integration
-- [ ] OLED Upgrade
-- [ ] 
-- [ ] 
-- [ ] 
-
-## The Name
-
-Talos takes its name from the bronze guardian of Greek mythology, known for protecting the island of Crete.
-
-I chose the name because I wanted the system to serve as a guardian and monitoring hub for my home.
-
-![Talos](images/talos.jpg)
-
----
-
-**Status:** Ongoing personal project.
-
-Having used Talos for 2 weeks, I can say I am fairly surprised at how useful and reliable it has become.
-Although Talos started as a wall-mounted hub, it has now become a dedicated display on my desk. 
-Sensor readings are accurate and translate closely to when the events occur. 
-I have now decided to return my 8-inch LCD display, for a bigger OLED. 
-I want the screen to fit the background/aesthetic more than an LCD can. 
+Raspberry Pi 4 · 1280×800 touchscreen · Zigbee USB coordinator · Aqara FP300
